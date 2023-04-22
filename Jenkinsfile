@@ -6,7 +6,7 @@ pipeline{
             steps{
                 echo "========executing git checkout========"
 
-                git branch: 'main', url: 'https://github.com/latesh-11/real-time-project-2nd.git'
+                git branch: 'main', url: 'https://github.com/latesh-11/real-time-project_2nd.git'
             }
         }
         stage("sonar quality analysis"){
