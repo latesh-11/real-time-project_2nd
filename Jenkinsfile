@@ -34,7 +34,7 @@ pipeline{
                  echo "========executing docker build & push========"
                 
                 script{
-                    sh 'docker build image -t ${JOB_NAME}:v1.${BUILD_ID} .'
+                    sh 'docker build -t ${JOB_NAME}:v1.${BUILD_ID} .'
                 }
             }
         }
