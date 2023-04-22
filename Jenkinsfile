@@ -28,6 +28,15 @@ pipeline{
                 waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api-key'
             }
         }
-        
+        stage("docker build & push"){
+
+            steps{
+                 echo "========executing docker build & push========"
+                
+                script{
+                    sh 'docker build image -t ${JOB_NAME}:v1.${BUILD_ID} .'
+                }
+            }
+        }
     }
 }
