@@ -28,15 +28,6 @@ pipeline{
                 waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api-key'
             }
         }
-        stage("Docker build & Docker push to nexus"){
-
-            steps{
-                echo "========executing Docker build & Docker push to nexus========"
-                
-                script {
-                    
-                }
-            }
-        }
+        
     }
 }
