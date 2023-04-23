@@ -68,6 +68,18 @@ pipeline{
                 }
             }
         }
+        stage("pushing the helm chat to nexus repo"){
+
+            steps{
+                 echo "========executing pushing the helm chat to nexus repo========"
+                
+                script {
+                   withCredentials([string(credentialsId: 'nexus-pass', variable: 'nexus_creds')]) {
+                    sh "curl -u admin:$nexus_creds http://192.168.1.8:8081/repository/helm-repo/ --upload-file myapp-${helmversion}.tgz -v"
+                   }
+                }
+            }
+        }
     }
     post {
        
