@@ -38,11 +38,11 @@ pipeline{
                  echo "========executing docker build & push to nexus========"
                 
                 script{
-                   withCredentials([string(credentialsId: 'nexus-pass', variable: 'nexus-cred')]) {
+                   withCredentials([string(credentialsId: 'nexus-pass', variable: 'nexus-pwd')]) {
                     sh """"
                         docker build -t 192.168.1.8/springapp:v.${VERSION} .
 
-                        docker login -u admin -p $nexus-cred 192.168.1.8:8083
+                        docker login -u admin -p $nexus-pwd 192.168.1.8:8083
 
                         doocker push 192.168.1.8/springapp:v.${VERSION} 
 
