@@ -1,6 +1,10 @@
 pipeline{
     agent any
 
+    environment {
+        VERSION  = "${env.BUILD_ID}"
+    }
+
     stages{
         stage("git checkout"){
             steps{
@@ -34,7 +38,18 @@ pipeline{
                  echo "========executing docker build & push========"
                 
                 script{
-                    sh 'docker build -t ${JOB_NAME}:v1.${BUILD_ID} .'
+                   withCredentials([string(credentialsId: 'nexus-pass', variable: 'nexus-cred')]) {
+                    sh """"
+                        docker build -t 192.168.1.8/springapp:v.${VERSION} .
+
+                        docker login -u admin -p ${nexus-cred} 192.168.1.8:8083
+
+                        doocker push 192.168.1.8/springapp:v.${VERSION} 
+
+                        docker image rm  -f 192.168.1.8/springapp:v.${VERSION} 
+                        """
+                   }
+
                 }
             }
         }
