@@ -32,10 +32,10 @@ pipeline{
                 waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api-key'
             }
         }
-        stage("docker build & push"){
+        stage("docker build & push to nexus"){
 
             steps{
-                 echo "========executing docker build & push========"
+                 echo "========executing docker build & push to nexus========"
                 
                 script{
                    withCredentials([string(credentialsId: 'nexus-pass', variable: 'nexus-cred')]) {
